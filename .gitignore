@@ -1,0 +1,54 @@
+# --- Data (never committed; see README for how to obtain it) ---
+data/**
+!data/raw/
+!data/processed/
+!data/**/.gitkeep
+
+# Audio files anywhere in the repo
+*.mp3
+*.wav
+*.flac
+*.ogg
+*.m4a
+
+# --- Model artifacts / training outputs ---
+/outputs/
+/checkpoints/
+/models/
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.ckpt
+
+# --- Experiment tracking ---
+wandb/
+mlruns/
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+
+# --- Notebooks ---
+.ipynb_checkpoints/
+
+# --- Secrets / local config ---
+.env
+.env.*
+
+# --- Editors / OS ---
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
+
+# --- Gradio ---
+.gradio/
+flagged/
