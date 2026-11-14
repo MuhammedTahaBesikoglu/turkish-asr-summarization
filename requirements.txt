@@ -1,0 +1,12 @@
+# Core ML / data stack.
+# PyTorch is NOT listed here: install it first with the CUDA-specific command in README.md.
+transformers
+datasets
+evaluate
+accelerate
+peft
+jiwer
+soundfile
+librosa
+pandas
+pyyaml

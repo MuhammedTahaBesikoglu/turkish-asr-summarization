@@ -1,0 +1,4 @@
+# Development tools (lint, tests, notebooks). Lightweight: used by CI as well.
+ruff
+pytest
+ipykernel
