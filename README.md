@@ -34,7 +34,7 @@ Test split: Common Voice Turkish (official `test` split, version TBD).
 
 ## Setup
 
-Requirements: Python 3.10+ (developed on 3.12), an NVIDIA GPU is recommended.
+Requirements: Python 3.10+ (developed on 3.12.10), an NVIDIA GPU is recommended.
 Training was run on Google Colab (T4); local development on a 4 GB laptop GPU.
 
 ```bash
@@ -43,8 +43,11 @@ cd turkish-asr-summarization
 python -m venv .venv
 # Windows: .venv\Scripts\activate    Linux/macOS: source .venv/bin/activate
 
-# 1. PyTorch (pick the command for your CUDA version at https://pytorch.org/get-started/locally/)
-#    TBD: exact command used for this project
+# 1. PyTorch with CUDA (version used for this project: 2.15.0 + CUDA 13.2).
+#    Needs an NVIDIA driver supporting CUDA 13.2+. For other setups, pick the
+#    matching command at https://pytorch.org/get-started/locally/.
+#    On Google Colab, skip this step and keep the preinstalled PyTorch.
+pip install torch==2.15.0 --index-url https://download.pytorch.org/whl/cu132
 
 # 2. Project dependencies
 pip install -r requirements.txt -r requirements-dev.txt

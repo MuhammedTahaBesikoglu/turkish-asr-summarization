@@ -1,12 +1,19 @@
-# Core ML / data stack.
-# PyTorch is NOT listed here: install it first with the CUDA-specific command in README.md.
-transformers
-datasets
-evaluate
-accelerate
-peft
-jiwer
-soundfile
-librosa
-pandas
-pyyaml
+# Core ML / data stack. Versions are the ones actually installed and verified locally
+# (Python 3.12.10, Windows 11). Only direct dependencies are pinned.
+#
+# PyTorch is NOT listed here: it needs a CUDA-specific index URL. Install it first:
+#   pip install torch==2.15.0 --index-url https://download.pytorch.org/whl/cu132
+# On Google Colab, keep the preinstalled PyTorch.
+#
+# torchaudio is intentionally not used: audio I/O and resampling go through
+# soundfile + librosa.
+transformers==5.23.0
+datasets==5.2.0
+evaluate==0.4.6
+accelerate==1.15.0
+peft==0.21.3
+jiwer==4.0.0
+soundfile==0.14.0
+librosa==1.0.1
+pandas==3.1.1
+pyyaml==6.0.3

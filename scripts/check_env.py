@@ -12,7 +12,6 @@ from importlib import metadata
 
 PACKAGES = [
     "torch",
-    "torchaudio",
     "transformers",
     "datasets",
     "evaluate",
