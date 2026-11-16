@@ -11,7 +11,7 @@ here must come from actual evaluation runs (see `results/`); unmeasured values a
 | [development.md](development.md) | Lint, format, tests, CI | 1 | done |
 | [data.md](data.md) | Common Voice loading from local files, EDA | 2 | done |
 | [normalization.md](normalization.md) | Turkish text normalization | 3 | done |
-| baseline.md | Zero-shot `whisper-small` evaluation | 4 | planned |
+| [baseline.md](baseline.md) | Zero-shot `whisper-small` evaluation, WER/CER | 4 | code done, Colab run pending |
 | training.md | Full fine-tune and LoRA | 5 | planned |
 | evaluation.md | WER/CER, comparison, error analysis | 6 | planned |
 | summarization.md | Summarization model and chunking | 7 | planned |

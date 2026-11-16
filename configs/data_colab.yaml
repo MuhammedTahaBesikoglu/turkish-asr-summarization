@@ -1,0 +1,11 @@
+# Same dataset as configs/data.yaml, extracted on the Colab VM's local disk
+# (see notebooks/colab_baseline.ipynb). Reading clips directly from Google Drive is slow.
+dataset:
+  name: common_voice
+  version: "27.0"
+  release_date: "2026-09-11"
+  locale: tr
+  root: /content/data/cv-corpus-27.0-2026-09-11/tr
+
+audio:
+  sampling_rate: 16000

@@ -4,9 +4,9 @@ End-to-end system that transcribes Turkish speech (meetings, podcasts, lectures)
 fine-tuned [Whisper](https://huggingface.co/openai/whisper-small) model and summarizes the
 transcript with a language model.
 
-> **Status:** work in progress. Stages 1–3 (setup, data, normalization) are done; next is the
-> zero-shot baseline. All results below are **TBD** until the evaluation scripts have
-> actually been run.
+> **Status:** work in progress. Stages 1–3 (setup, data, normalization) are done; the
+> zero-shot baseline evaluation is implemented and waiting for its Colab run. All results
+> below are **TBD** until the evaluation scripts have actually been run.
 
 **Demo:** TBD (Hugging Face Spaces) · **Model:** TBD (Hugging Face Hub)
 
@@ -19,6 +19,9 @@ audio ──► Whisper (fine-tuned, Turkish) ──► transcript ──► sum
 ## Results
 
 Test split: Common Voice Turkish 27.0, official `test` split (11,874 clips, 1,500 speakers).
+Corpus-level WER/CER; "normalized" uses the Turkish normalizer in
+[docs/normalization.md](docs/normalization.md) (casing, punctuation, numbers spelled out).
+How to reproduce: [docs/baseline.md](docs/baseline.md).
 
 | Model                     | WER (normalized) | CER (normalized) | WER (raw) |
 |---------------------------|------------------|------------------|-----------|
