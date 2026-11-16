@@ -13,6 +13,8 @@ MODULES = [
     "src.data.stats",
     "src.training",
     "src.evaluation",
+    "src.evaluation.metrics",
+    "src.evaluation.evaluate_asr",
     "src.summarization",
     "src.pipeline",
 ]
