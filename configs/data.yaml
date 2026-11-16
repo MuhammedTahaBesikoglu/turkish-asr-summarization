@@ -1,0 +1,13 @@
+# Common Voice Turkish, downloaded manually from the Mozilla Data Collective
+# (https://datacollective.mozillafoundation.org) and extracted under data/raw/.
+dataset:
+  name: common_voice
+  version: "27.0"
+  release_date: "2026-09-11"
+  locale: tr
+  # Relative paths are resolved against the repository root; use an absolute path on
+  # Colab (e.g. /content/drive/MyDrive/cv-corpus-27.0-2026-09-11/tr).
+  root: data/raw/cv-corpus-27.0-2026-09-11/tr
+
+audio:
+  sampling_rate: 16000 # Whisper expects 16 kHz mono

@@ -1,0 +1,112 @@
+{
+  "train": {
+    "clips": 41465,
+    "speakers": 28,
+    "top_speaker_share": 0.2018569878210539,
+    "hours": 45.27375,
+    "clips_without_duration": 0,
+    "clips_over_30s": 0,
+    "duration_s": {
+      "mean": 3.9306764741348124,
+      "median": 3.276,
+      "p95": 8.064,
+      "min": 0.648,
+      "max": 13.32
+    },
+    "words_per_sentence": {
+      "mean": 5.02783070059086,
+      "median": 4.0,
+      "p95": 12.0,
+      "min": 1.0,
+      "max": 20.0
+    },
+    "gender": {
+      "male_masculine": 18094,
+      "female_feminine": 17460,
+      "unspecified": 5911
+    },
+    "age": {
+      "sixties": 13955,
+      "twenties": 7330,
+      "unspecified": 5911,
+      "fifties": 4265,
+      "eighties": 3439,
+      "thirties": 2834,
+      "seventies": 2829,
+      "fourties": 902
+    }
+  },
+  "dev": {
+    "clips": 11864,
+    "speakers": 163,
+    "top_speaker_share": 0.02478084962913014,
+    "hours": 12.34639,
+    "clips_without_duration": 0,
+    "clips_over_30s": 0,
+    "duration_s": {
+      "mean": 3.746375927174646,
+      "median": 3.276,
+      "p95": 7.056,
+      "min": 0.756,
+      "max": 11.016
+    },
+    "words_per_sentence": {
+      "mean": 4.970751854349292,
+      "median": 4.0,
+      "p95": 12.0,
+      "min": 1.0,
+      "max": 19.0
+    },
+    "gender": {
+      "male_masculine": 6053,
+      "unspecified": 4139,
+      "female_feminine": 1672
+    },
+    "age": {
+      "twenties": 3987,
+      "unspecified": 3601,
+      "thirties": 2016,
+      "fourties": 684,
+      "teens": 671,
+      "fifties": 577,
+      "sixties": 328
+    }
+  },
+  "test": {
+    "clips": 11874,
+    "speakers": 1500,
+    "top_speaker_share": 0.004210880916287687,
+    "hours": 14.537303055555554,
+    "clips_without_duration": 0,
+    "clips_over_30s": 0,
+    "duration_s": {
+      "mean": 4.4074693447869295,
+      "median": 4.104,
+      "p95": 7.668,
+      "min": 1.332,
+      "max": 13.86
+    },
+    "words_per_sentence": {
+      "mean": 5.645275391611925,
+      "median": 5.0,
+      "p95": 12.0,
+      "min": 1.0,
+      "max": 20.0
+    },
+    "gender": {
+      "unspecified": 7883,
+      "male_masculine": 3251,
+      "female_feminine": 740
+    },
+    "age": {
+      "unspecified": 7133,
+      "twenties": 2313,
+      "thirties": 1330,
+      "fourties": 461,
+      "teens": 363,
+      "fifties": 210,
+      "sixties": 60,
+      "eighties": 4
+    }
+  }
+}

@@ -9,7 +9,7 @@ here must come from actual evaluation runs (see `results/`); unmeasured values a
 |-----|-----------|---------------|--------|
 | [setup.md](setup.md) | Environment setup, `scripts/check_env.py` | 1 | done |
 | [development.md](development.md) | Lint, format, tests, CI | 1 | done |
-| data.md | Common Voice loading from local files, EDA | 2 | planned |
+| [data.md](data.md) | Common Voice loading from local files, EDA | 2 | done |
 | [normalization.md](normalization.md) | Turkish text normalization | 3 | done |
 | baseline.md | Zero-shot `whisper-small` evaluation | 4 | planned |
 | training.md | Full fine-tune and LoRA | 5 | planned |
