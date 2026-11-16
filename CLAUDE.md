@@ -92,6 +92,7 @@ turkish-asr-summarization/
 - `ruff` ile lint/format
 - Notebook'lar sadece analiz içindir; asıl mantık `src/` altında olmalı
 - Türkçe normalizasyon fonksiyonu için mutlaka unit test yazılmalı
+- Her işlev/bileşen için `docs/` altında bir `.md` dosyası olmalı (ne yapar, nasıl çalıştırılır, girdi/çıktı, okuduğu config anahtarları, sınırlamalar). Doküman, bileşenle aynı commit'te eklenir ve `docs/README.md` indeksi güncellenir.
 
 ## Yol haritası (aşamalar)
 1. **Kurulum:** Repo yapısı, `requirements.txt`, ortam kurulumu, `.gitignore`

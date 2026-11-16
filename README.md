@@ -85,6 +85,7 @@ app/              Gradio demo
 tests/            pytest tests
 results/          metric tables and plots
 scripts/          utility scripts (e.g. environment check)
+docs/             one Markdown doc per component (see docs/README.md)
 ```
 
 ## Known limitations

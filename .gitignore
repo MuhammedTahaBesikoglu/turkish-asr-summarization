@@ -43,6 +43,9 @@ venv/
 .env
 .env.*
 
+# --- Claude Code (shared settings.json is committed, personal overrides are not) ---
+.claude/settings.local.json
+
 # --- Editors / OS ---
 .vscode/
 .idea/
