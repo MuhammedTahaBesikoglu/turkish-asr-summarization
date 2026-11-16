@@ -12,9 +12,26 @@ for the fine-tuned models, so the numbers are directly comparable.
 
 | Model | Clips | WER (normalized) | CER (normalized) | WER (raw) | CER (raw) |
 |---|---|---|---|---|---|
-| `whisper-small` zero-shot | 11,874 | TBD | TBD | TBD | TBD |
+| `whisper-small` zero-shot | 11,874 | 21.82% | 6.98% | 32.17% | 10.36% |
 
-Filled in from `results/baseline/whisper-small-zeroshot/metrics.json` once the Colab run is done.
+Source: [`results/baseline/whisper-small-zeroshot/metrics.json`](../results/baseline/whisper-small-zeroshot/metrics.json)
+(full split, `is_full_split: true`).
+
+| | Normalized | Raw |
+|---|---|---|
+| Substitutions | 11,164 | 17,119 |
+| Deletions | 1,278 | 2,312 |
+| Insertions | 2,200 | 2,135 |
+| Reference words | 67,099 | 67,032 |
+
+The two rows differ in reference word count because normalization changes the
+tokens, for example by spelling out numbers. 1,106 hypotheses contain digits while no reference
+does, so every digit is an error on raw text; this, together with casing and punctuation, is
+why raw WER is higher. No hypothesis was empty.
+
+Run: Colab, Tesla T4, fp16, 672.9 s (17.65 clips/s), peak GPU memory 2.5 GiB. Code at commit
+`08e7b72`, Python 3.13.16 (Colab runtime), torch 2.14.1+cu130, transformers 5.23.0,
+jiwer 4.0.0, librosa 1.0.1.
 
 ## Running
 

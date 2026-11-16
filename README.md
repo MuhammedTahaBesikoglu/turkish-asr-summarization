@@ -4,9 +4,8 @@ End-to-end system that transcribes Turkish speech (meetings, podcasts, lectures)
 fine-tuned [Whisper](https://huggingface.co/openai/whisper-small) model and summarizes the
 transcript with a language model.
 
-> **Status:** work in progress. Stages 1–3 (setup, data, normalization) are done; the
-> zero-shot baseline evaluation is implemented and waiting for its Colab run. All results
-> below are **TBD** until the evaluation scripts have actually been run.
+> **Status:** work in progress. Stages 1–4 (setup, data, normalization, zero-shot baseline)
+> are done; fine-tuning is next. Results not yet measured are marked **TBD**.
 
 **Demo:** TBD (Hugging Face Spaces) · **Model:** TBD (Hugging Face Hub)
 
@@ -25,7 +24,7 @@ How to reproduce: [docs/baseline.md](docs/baseline.md).
 
 | Model                     | WER (normalized) | CER (normalized) | WER (raw) |
 |---------------------------|------------------|------------------|-----------|
-| `whisper-small` zero-shot | TBD              | TBD              | TBD       |
+| `whisper-small` zero-shot | 21.82%           | 6.98%            | 32.17%    |
 | `whisper-small` full FT   | TBD              | TBD              | TBD       |
 | `whisper-small` LoRA      | TBD              | TBD              | TBD       |
 

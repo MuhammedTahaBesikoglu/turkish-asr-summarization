@@ -1,0 +1,65 @@
+{
+  "model": "openai/whisper-small",
+  "dataset": "common_voice 27.0 tr",
+  "split": "test",
+  "num_clips": 11874,
+  "is_full_split": true,
+  "metrics": {
+    "normalized": {
+      "wer": 0.21821487652573063,
+      "cer": 0.06980659634981021,
+      "substitutions": 11164,
+      "deletions": 1278,
+      "insertions": 2200,
+      "reference_words": 67099
+    },
+    "raw": {
+      "wer": 0.3217269363885905,
+      "cer": 0.10356821326753472,
+      "substitutions": 17119,
+      "deletions": 2312,
+      "insertions": 2135,
+      "reference_words": 67032
+    }
+  },
+  "hypotheses_with_digits": 1106,
+  "empty_hypotheses": 0,
+  "runtime": {
+    "device": "cuda",
+    "gpu": "Tesla T4",
+    "dtype": "float16",
+    "seconds": 672.9,
+    "clips_per_second": 17.65,
+    "peak_gpu_memory_gib": 2.5
+  },
+  "versions": {
+    "python": "3.13.16",
+    "torch": "2.14.1+cu130",
+    "transformers": "5.23.0",
+    "jiwer": "4.0.0",
+    "librosa": "1.0.1",
+    "soundfile": "0.14.0"
+  },
+  "git_commit": "08e7b72a025c6b8fa4e429dea6dd2d263b7fc151",
+  "finished_at": "2026-11-16T15:00:12+00:00",
+  "config": {
+    "data_config": "configs/data_colab.yaml",
+    "model": {
+      "name": "openai/whisper-small",
+      "language": "tr",
+      "task": "transcribe"
+    },
+    "eval": {
+      "split": "test",
+      "max_samples": null,
+      "batch_size": 32,
+      "num_beams": 1,
+      "max_length": 225,
+      "fp16": true,
+      "num_workers": 2
+    },
+    "output": {
+      "dir": "results/baseline/whisper-small-zeroshot"
+    }
+  }
+}
