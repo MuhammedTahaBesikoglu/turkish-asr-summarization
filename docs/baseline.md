@@ -23,7 +23,7 @@ Colab (T4), as used for the reported numbers:
 1. Locally: `python scripts/pack_data.py --splits test`, which writes
    `data/colab/cv-corpus-27.0-2026-09-11-test.tar` (355 MiB, test TSV and clips only).
 2. Upload the `.tar` to Google Drive (`MyDrive/turkish-asr/` by default).
-3. Open `notebooks/colab_baseline.ipynb` in Colab, set `REPO_URL`, run all cells.
+3. Open `notebooks/colab_baseline.ipynb` in Colab and run all cells.
 4. Copy `MyDrive/turkish-asr/results/baseline/whisper-small-zeroshot/` into `results/baseline/`
    and commit it.
 
