@@ -10,6 +10,8 @@ from __future__ import annotations
 import re
 import unicodedata
 
+from src.data.numbers import expand_numbers
+
 # Python's str.lower() maps "I" -> "i" and "İ" -> "i̇" (i + U+0307 combining dot), both wrong
 # for Turkish. Map the dotted/dotless pair explicitly before lowercasing the rest.
 _TURKISH_LOWER = str.maketrans({"I": "ı", "İ": "i"})
@@ -31,20 +33,27 @@ def turkish_lower(text: str) -> str:
     return unicodedata.normalize("NFC", text).translate(_TURKISH_LOWER).lower()
 
 
-def normalize_text(text: str, *, fold_circumflex: bool = True) -> str:
+def normalize_text(
+    text: str, *, fold_circumflex: bool = True, spell_out_numbers: bool = True
+) -> str:
     """Normalize Turkish text for WER/CER computation.
 
-    Steps: Unicode NFC, Turkish lowercasing, optional circumflex folding (â/î/û -> a/i/u),
+    Steps: Unicode NFC, numbers spelled out in Turkish ("%44,84" -> "yüzde kırk dört virgül
+    seksen dört"), Turkish lowercasing, optional circumflex folding (â/î/û -> a/i/u),
     apostrophe removal, every other non-alphanumeric character replaced by a space,
-    whitespace collapsed. Digits are kept as they are.
+    whitespace collapsed.
 
     Args:
         text: Raw reference or model output.
         fold_circumflex: Map â, î, û to a, i, u.
+        spell_out_numbers: Replace digits with Turkish number words.
 
     Returns:
         The normalized string (possibly empty).
     """
+    text = unicodedata.normalize("NFC", text)
+    if spell_out_numbers:
+        text = expand_numbers(text)
     text = turkish_lower(text)
     if fold_circumflex:
         text = text.translate(_CIRCUMFLEX)

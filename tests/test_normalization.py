@@ -54,8 +54,9 @@ def test_turkish_lower_differs_from_builtin() -> None:
         # Replacement character / symbols from broken references
         ("fonların yaklaşık �'i", "fonların yaklaşık i"),
         ("şirketin %'ini", "şirketin ini"),
-        # Digits are kept
-        ("2023 yılında 5 kişi", "2023 yılında 5 kişi"),
+        # Digits are spelled out (details in test_numbers.py)
+        ("2023 yılında 5 kişi", "iki bin yirmi üç yılında beş kişi"),
+        ("1996'da", "bin dokuz yüz doksan altıda"),
         # Non-Turkish Latin letters are kept
         ("Charité hastanesi", "charité hastanesi"),
         # Whitespace
