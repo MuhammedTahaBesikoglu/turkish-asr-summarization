@@ -22,6 +22,7 @@ PACKAGES = [
     "librosa",
     "pandas",
     "pyyaml",
+    "matplotlib",
 ]
 
 

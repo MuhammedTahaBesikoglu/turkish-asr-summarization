@@ -3,3 +3,4 @@
 ruff==0.17.5
 pytest==9.2.0
 ipykernel==7.4.0
+nbconvert==7.17.2  # execute notebooks: jupyter nbconvert --execute --inplace

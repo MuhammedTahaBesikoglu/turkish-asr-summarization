@@ -4,8 +4,9 @@ End-to-end system that transcribes Turkish speech (meetings, podcasts, lectures)
 fine-tuned [Whisper](https://huggingface.co/openai/whisper-small) model and summarizes the
 transcript with a language model.
 
-> **Status:** work in progress — stage 1 (setup). All results below are **TBD** until the
-> evaluation scripts have actually been run.
+> **Status:** work in progress. Stages 1–3 (setup, data, normalization) are done; next is the
+> zero-shot baseline. All results below are **TBD** until the evaluation scripts have
+> actually been run.
 
 **Demo:** TBD (Hugging Face Spaces) · **Model:** TBD (Hugging Face Hub)
 
@@ -17,7 +18,7 @@ audio ──► Whisper (fine-tuned, Turkish) ──► transcript ──► sum
 
 ## Results
 
-Test split: Common Voice Turkish (official `test` split, version TBD).
+Test split: Common Voice Turkish 27.0, official `test` split (11,874 clips, 1,500 speakers).
 
 | Model                     | WER (normalized) | CER (normalized) | WER (raw) |
 |---------------------------|------------------|------------------|-----------|
@@ -61,13 +62,28 @@ ruff check .
 
 ## Data
 
-[Mozilla Common Voice](https://commonvoice.mozilla.org/) Turkish (`tr`), version **TBD**.
+[Mozilla Common Voice](https://commonvoice.mozilla.org/) Turkish (`tr`), version **27.0**
+(`cv-corpus-27.0-2026-09-11`), released under CC0.
 
 Since October 2025 Common Voice is distributed only through the
 [Mozilla Data Collective](https://datacollective.mozillafoundation.org); it is no longer
 available via `datasets.load_dataset` from the Hugging Face Hub. Download the Turkish
-release manually and extract it under `data/raw/` (the `data/` folder is git-ignored).
+release manually and extract it under `data/raw/` (the `data/` folder is git-ignored), then
+set `dataset.root` in `configs/data.yaml`.
 The official train / dev / test splits are used; the test split is never used for training.
+
+| | train | dev | test |
+|---|---|---|---|
+| Clips | 41,465 | 11,864 | 11,874 |
+| Speakers | 28 | 163 | 1,500 |
+| Hours | 45.27 | 12.35 | 14.54 |
+
+The training split has very few speakers (top 5 = 62.4% of clips). Details, figures and other
+findings: [docs/data.md](docs/data.md), `notebooks/01_data_exploration.ipynb`.
+
+```bash
+python -m src.data.stats   # writes results/data_summary.md
+```
 
 ## Project structure
 
