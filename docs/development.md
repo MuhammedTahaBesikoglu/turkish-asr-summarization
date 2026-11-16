@@ -4,7 +4,7 @@
 
 [ruff](https://docs.astral.sh/ruff/) (pinned in `requirements-dev.txt`) handles both. Rules are
 configured in `pyproject.toml` (`E`, `W`, `F`, `I`, `UP`, `B`, `SIM`; line length 100; target
-Python 3.10). Notebooks are included.
+Python 3.12). Notebooks are included.
 
 ```bash
 ruff check .          # lint
@@ -24,8 +24,7 @@ pytest
 
 ## CI
 
-`.github/workflows/ci.yml` runs on every push to `main` and on pull requests, on Python 3.10
-and 3.12:
+`.github/workflows/ci.yml` runs on every push to `main` and on pull requests, on Python 3.12:
 
 1. Install `requirements-dev.txt` and the package (`pip install -e .`), not the ML stack.
 2. `ruff check .`

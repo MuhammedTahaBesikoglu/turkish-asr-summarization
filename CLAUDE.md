@@ -87,7 +87,7 @@ turkish-asr-summarization/
 ```
 
 ## Kod standartları 
-- Python 3.10+
+- Python 3.12+ (ML bağımlılıkları bunu gerektiriyor: librosa 1.0 → ≥3.12, pandas 3.x → ≥3.11; Colab da 3.12)
 - Type hint kullanımı, kısa ve anlaşılır docstring'ler
 - `ruff` ile lint/format
 - Notebook'lar sadece analiz içindir; asıl mantık `src/` altında olmalı

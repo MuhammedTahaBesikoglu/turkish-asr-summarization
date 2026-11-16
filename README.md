@@ -35,7 +35,7 @@ Test split: Common Voice Turkish 27.0, official `test` split (11,874 clips, 1,50
 
 ## Setup
 
-Requirements: Python 3.10+ (developed on 3.12.10), an NVIDIA GPU is recommended.
+Requirements: Python 3.12+ (developed on 3.12.10), an NVIDIA GPU is recommended.
 Training was run on Google Colab (T4); local development on a 4 GB laptop GPU.
 
 ```bash

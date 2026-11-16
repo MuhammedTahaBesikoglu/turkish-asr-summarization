@@ -9,7 +9,7 @@ description = "Turkish speech-to-text (fine-tuned Whisper) and summarization pip
 readme = "README.md"
 license = "MIT"
 license-files = ["LICENSE"]
-requires-python = ">=3.10"
+requires-python = ">=3.12"
 # Runtime dependencies live in requirements.txt (PyTorch needs a CUDA-specific
 # index URL, so it is installed separately; see README). Keeping this list empty
 # lets CI install the package without pulling the ML stack.
@@ -20,7 +20,7 @@ include = ["src*"]
 
 [tool.ruff]
 line-length = 100
-target-version = "py310"
+target-version = "py312"
 extend-include = ["*.ipynb"]
 
 [tool.ruff.lint]
