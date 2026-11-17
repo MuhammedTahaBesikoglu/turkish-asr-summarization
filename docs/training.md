@@ -167,6 +167,9 @@ once.
   to two are kept, plus `final/` (~0.97 GB). LoRA checkpoints are small; its `final/` is
   ~0.97 GB. With the data archives, keep roughly 10 GB free.
 - Suggested order: LoRA first (smaller checkpoints), then full fine-tune.
+- Colab preinstalls `torchao` 0.10; peft 0.21 raises *"Found an incompatible version of
+  torchao ... only versions above 0.16.0 are supported"* when it creates LoRA layers. The
+  project does not use torchao, so the notebook uninstalls it.
 
 ## Known limitations
 
