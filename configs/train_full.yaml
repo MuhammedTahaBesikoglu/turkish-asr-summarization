@@ -1,0 +1,59 @@
+# Full fine-tune of whisper-small on the Common Voice Turkish train split.
+# Run:   python -m src.training.train_whisper --config configs/train_full.yaml
+# Colab: see notebooks/colab_train.ipynb (adds --data-config, --tracking-backup, --resume).
+# Starting values follow the Hugging Face "Fine-Tune Whisper For Multilingual ASR" recipe.
+# Everything except `method`, `lora` and `training.learning_rate` is identical in
+# train_lora.yaml, so the two runs are directly comparable.
+data_config: configs/data.yaml
+
+model:
+  name: openai/whisper-small
+  language: tr
+  task: transcribe
+
+method: full # full | lora
+lora: null
+
+data:
+  train_split: train
+  eval_split: dev # the test split is rejected here; it is only used by evaluate_asr
+  max_train_samples: null # null = whole split
+  eval_samples: 2000 # fixed random dev subset for evaluation during training
+  seed: 42
+  num_workers: 2 # DataLoader workers decoding MP3s (Colab free tier has 2 vCPUs)
+
+# Passed to transformers.Seq2SeqTrainingArguments as-is (plus the fixed settings in
+# train_whisper.py: predict_with_generate, report_to, run_name, dataloader workers).
+training:
+  output_dir: outputs/whisper-small-full # symlinked to Google Drive on Colab
+  per_device_train_batch_size: 16
+  gradient_accumulation_steps: 1
+  learning_rate: 1.0e-5
+  lr_scheduler_type: linear
+  warmup_steps: 500
+  max_steps: 4000 # ~1.5 epochs of 41,465 clips
+  fp16: true # ignored on CPU
+  activation_checkpointing: true # a.k.a. gradient checkpointing
+  activation_checkpointing_kwargs:
+    use_reentrant: false
+  per_device_eval_batch_size: 32
+  generation_max_length: 225
+  generation_num_beams: 1
+  eval_strategy: steps
+  eval_steps: 500
+  save_strategy: steps
+  save_steps: 500 # = eval_steps (needed for load_best_model_at_end)
+  save_total_limit: 1 # keeps the latest and the best checkpoint
+  load_best_model_at_end: true
+  metric_for_best_model: wer # normalized dev WER
+  greater_is_better: false
+  logging_steps: 25
+  seed: 42
+
+tracking: # set to null to disable MLflow
+  experiment: whisper-small-tr
+  run_name: whisper-small-full
+  db: mlflow/mlflow.db # SQLite, relative to the repository root
+
+output:
+  results_dir: results/finetune/whisper-small-full # train_summary.json

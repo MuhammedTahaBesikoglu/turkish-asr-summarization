@@ -1,0 +1,21 @@
+# Test-set evaluation of the LoRA fine-tune (best dev checkpoint, LoRA merged).
+# Run:  python -m src.evaluation.evaluate_asr --config configs/eval_lora.yaml
+# Colab: add  --data-config configs/data_colab.yaml
+data_config: configs/data.yaml
+
+model:
+  name: outputs/whisper-small-lora/final # written by src.training.train_whisper
+  language: tr
+  task: transcribe
+
+eval:
+  split: test
+  max_samples: null # null = whole split; e.g. 100 for a quick smoke run
+  batch_size: 32 # 32 fits a 16 GB T4 in fp16; use 8 on a 4 GB GPU
+  num_beams: 1 # greedy decoding
+  max_length: 225 # decoder tokens incl. the 4 prompt tokens; longest reference is 20 words
+  fp16: true # ignored on CPU
+  num_workers: 2 # DataLoader workers that decode MP3s
+
+output:
+  dir: results/finetune/whisper-small-lora

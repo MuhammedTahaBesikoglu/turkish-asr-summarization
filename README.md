@@ -5,7 +5,8 @@ fine-tuned [Whisper](https://huggingface.co/openai/whisper-small) model and summ
 transcript with a language model.
 
 > **Status:** work in progress. Stages 1–4 (setup, data, normalization, zero-shot baseline)
-> are done; fine-tuning is next. Results not yet measured are marked **TBD**.
+> are done; the fine-tuning code (full + LoRA, [docs/training.md](docs/training.md)) is ready
+> and the training runs are pending. Results not yet measured are marked **TBD**.
 
 **Demo:** TBD (Hugging Face Spaces) · **Model:** TBD (Hugging Face Hub)
 

@@ -12,7 +12,7 @@ here must come from actual evaluation runs (see `results/`); unmeasured values a
 | [data.md](data.md) | Common Voice loading from local files, EDA | 2 | done |
 | [normalization.md](normalization.md) | Turkish text normalization | 3 | done |
 | [baseline.md](baseline.md) | Zero-shot `whisper-small` evaluation, WER/CER | 4 | done |
-| training.md | Full fine-tune and LoRA | 5 | planned |
+| [training.md](training.md) | Full fine-tune and LoRA, MLflow tracking | 5 | code done, Colab runs pending |
 | evaluation.md | WER/CER, comparison, error analysis | 6 | planned |
 | summarization.md | Summarization model and chunking | 7 | planned |
 | pipeline.md | Audio → transcript → summary | 8 | planned |
