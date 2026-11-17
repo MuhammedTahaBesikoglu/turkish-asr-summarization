@@ -23,6 +23,7 @@ PACKAGES = [
     "pandas",
     "pyyaml",
     "matplotlib",
+    "mlflow",
 ]
 
 

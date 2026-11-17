@@ -24,6 +24,9 @@ data/**
 # --- Experiment tracking ---
 wandb/
 mlruns/
+mlartifacts/
+/mlflow/
+mlflow.db
 
 # --- Python ---
 __pycache__/
