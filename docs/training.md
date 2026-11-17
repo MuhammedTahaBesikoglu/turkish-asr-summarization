@@ -117,6 +117,9 @@ python -m src.evaluation.evaluate_asr --config configs/eval_lora.yaml
   Turkish transcription. This is what `evaluate_asr.py` and the demo load.
 - `adapter/` (LoRA only): the adapter weights alone.
 - `mlflow_run_id.txt`: lets a resumed run continue the same MLflow run.
+- `train_summary.json`: copy of the summary below. Its presence marks the run as finished:
+  the script then exits without training, because after training the Trainer deletes the
+  last checkpoint when it is not the best one, and resuming would train again.
 
 `output.results_dir` (`results/finetune/whisper-small-<method>/`, committed):
 

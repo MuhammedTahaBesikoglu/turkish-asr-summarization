@@ -16,6 +16,7 @@ Outputs:
     <training.output_dir>/final          best model (LoRA: merged into the base weights) and
                                          processor, loadable by src.evaluation.evaluate_asr
     <training.output_dir>/adapter        LoRA only: the adapter weights alone
+    <training.output_dir>/train_summary.json   copy of the summary; marks the run as finished
     <output.results_dir>/train_summary.json
         time, peak GPU memory, parameter counts, dev metrics, log history, versions, config
 """
@@ -35,6 +36,7 @@ from src.run_info import git_commit, library_versions
 from src.training import tracking
 
 METHODS = ("full", "lora")
+SUMMARY_FILE = "train_summary.json"
 _VERSIONED = ["torch", "transformers", "accelerate", "peft", "mlflow", "jiwer", "librosa"]
 
 
@@ -151,6 +153,11 @@ def main() -> None:
     model_cfg, data_cfg, tracking_cfg = config["model"], config["data"], config.get("tracking")
     train_cfg = dict(config["training"])
     output_dir = resolve_path(train_cfg.pop("output_dir"))
+    if (output_dir / SUMMARY_FILE).is_file():
+        # After training the Trainer deletes the last checkpoint when it is not the best one,
+        # so "resuming" a finished run would silently train again from the best checkpoint.
+        print(f"{output_dir} already holds a finished run ({SUMMARY_FILE}); nothing to do.")
+        return
     checkpoint = find_checkpoint(output_dir, args.resume)
     backup_dir = resolve_path(args.tracking_backup) if args.tracking_backup else None
 
@@ -234,9 +241,10 @@ def main() -> None:
     }
     results_dir = resolve_path(config["output"]["results_dir"])
     results_dir.mkdir(parents=True, exist_ok=True)
-    (results_dir / "train_summary.json").write_text(
-        json.dumps(summary, indent=2, ensure_ascii=False, default=str), encoding="utf-8"
-    )
+    summary_json = json.dumps(summary, indent=2, ensure_ascii=False, default=str)
+    # Also next to the model (on Drive in Colab), where it marks the run as finished.
+    for directory in (results_dir, output_dir):
+        (directory / SUMMARY_FILE).write_text(summary_json, encoding="utf-8")
 
     if tracking_cfg:
         import mlflow
@@ -259,7 +267,7 @@ def main() -> None:
         f"on {len(eval_clips)} clips; train time {resources['train_seconds'] / 3600:.2f} h, "
         f"peak GPU memory {resources['peak_gpu_memory_gib']} GiB"
     )
-    print(f"Saved {final_dir} and {results_dir / 'train_summary.json'}")
+    print(f"Saved {final_dir} and {results_dir / SUMMARY_FILE}")
 
 
 if __name__ == "__main__":
