@@ -23,3 +23,25 @@ def resolve_path(path: str | Path, base: Path = REPO_ROOT) -> Path:
     """Return ``path`` as absolute; relative paths are taken relative to ``base``."""
     path = Path(path).expanduser()
     return path if path.is_absolute() else (base / path).resolve()
+
+
+def apply_overrides(config: dict[str, Any], overrides: list[str]) -> dict[str, Any]:
+    """Apply ``key.subkey=value`` overrides (values parsed as YAML) to ``config`` in place.
+
+    Example: ``["training.max_steps=10", "tracking=null"]``. Intermediate keys must exist,
+    so a typo fails loudly instead of silently adding a new key.
+    """
+    import yaml
+
+    for item in overrides:
+        key, sep, raw_value = item.partition("=")
+        if not sep or not key:
+            raise ValueError(f"Override {item!r} must look like key.subkey=value")
+        *parents, leaf = key.split(".")
+        node = config
+        for part in parents:
+            if not isinstance(node.get(part), dict):
+                raise KeyError(f"Override {item!r}: {part!r} is not a section of the config")
+            node = node[part]
+        node[leaf] = yaml.safe_load(raw_value)
+    return config
