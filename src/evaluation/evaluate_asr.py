@@ -17,42 +17,26 @@ from __future__ import annotations
 import argparse
 import csv
 import json
-import platform
 import re
-import subprocess
 import time
 from datetime import UTC, datetime
-from importlib import metadata
 from pathlib import Path
 from typing import Any
 
-from src.config import REPO_ROOT, load_config, resolve_path
+from src.config import load_config, resolve_path
 from src.data.common_voice import Clip, load_audio, load_split
 from src.data.normalization import normalize_text
 from src.evaluation.metrics import compute_metrics, utterance_wer
+from src.run_info import git_commit, library_versions
 
 _DIGIT_RE = re.compile(r"\d")
+_VERSIONED = ["torch", "transformers", "jiwer", "librosa", "soundfile"]
 
 
-def _git_commit() -> str | None:
-    try:
-        out = subprocess.run(
-            ["git", "rev-parse", "HEAD"], cwd=REPO_ROOT, capture_output=True, text=True, check=True
-        )
-        return out.stdout.strip()
-    except (OSError, subprocess.CalledProcessError):
-        return None
-
-
-def _versions() -> dict[str, str]:
-    names = ["torch", "transformers", "jiwer", "librosa", "soundfile"]
-    result = {"python": platform.python_version()}
-    for name in names:
-        try:
-            result[name] = metadata.version(name)
-        except metadata.PackageNotFoundError:
-            result[name] = "not installed"
-    return result
+def model_source(name: str) -> str:
+    """Resolve a local model directory against the repository root; keep Hub ids as given."""
+    path = resolve_path(name)
+    return str(path) if path.is_dir() else name
 
 
 class AudioDataset:
@@ -97,8 +81,9 @@ def transcribe(
     device = "cuda" if torch.cuda.is_available() else "cpu"
     dtype = torch.float16 if eval_cfg["fp16"] and device == "cuda" else torch.float32
 
-    processor = WhisperProcessor.from_pretrained(model_cfg["name"])
-    model = WhisperForConditionalGeneration.from_pretrained(model_cfg["name"], dtype=dtype)
+    name = model_source(model_cfg["name"])
+    processor = WhisperProcessor.from_pretrained(name)
+    model = WhisperForConditionalGeneration.from_pretrained(name, dtype=dtype)
     model.to(device).eval()
 
     loader = DataLoader(
@@ -215,8 +200,8 @@ def main() -> None:
         "hypotheses_with_digits": sum(bool(_DIGIT_RE.search(h)) for h in hypotheses),
         "empty_hypotheses": sum(not h.strip() for h in hypotheses),
         "runtime": runtime,
-        "versions": _versions(),
-        "git_commit": _git_commit(),
+        "versions": library_versions(_VERSIONED),
+        "git_commit": git_commit(),
         "finished_at": datetime.now(UTC).isoformat(timespec="seconds"),
         "config": config,
     }
